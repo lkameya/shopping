@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Poiret One', sans-serif;
     padding: 0;
     margin: 0;
     font-size: 1.5rem;
@@ -21,7 +21,10 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   colors: {
-    primary: '#0070f3',
+    black: '#101010',
+    darkgrey: '#646B6D',
+    lightgrey: '#8C9598',
+    white: '#FEFEFE',
   },
 }
 
