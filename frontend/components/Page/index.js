@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Poiret One', sans-serif;
-    padding: 0;
+    padding: 1rem;
     margin: 0;
     font-size: 1.5rem;
   }
