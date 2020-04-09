@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "NODE_ENV=test jest --watch"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,27 @@
     "react-dom": "^16.13.1",
     "styled-components": "^5.1.0"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/"
+    ],
+    "transform": {
+      "\\.(gql|graphql)$": "jest-transform-graphql",
+      ".*": "babel-jest",
+      "^.+\\.js?$": "babel-jest"
+    }
+  },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.7"
+    "babel-jest": "^25.3.0",
+    "babel-plugin-styled-components": "^1.10.7",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "jest": "^25.3.0",
+    "jest-transform-graphql": "^2.1.0"
   }
 }
