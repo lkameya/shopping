@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/leonardo-kameya-477db2/backend/dev
-# timestamp: Thu Apr 09 2020 23:01:42 GMT-0400 (Amazon Standard Time)
+# timestamp: Thu Apr 09 2020 23:12:32 GMT-0400 (Amazon Standard Time)
 
 type AggregateItem {
   count: Int!
@@ -24,6 +24,8 @@ type Item implements Node {
   largeImage: String
   price: Int!
   user: User!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -68,6 +70,10 @@ enum ItemOrderByInput {
   largeImage_DESC
   price_ASC
   price_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type ItemPreviousValues {
@@ -77,6 +83,8 @@ type ItemPreviousValues {
   image: String
   largeImage: String
   price: Int!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type ItemSubscriptionPayload {
@@ -366,6 +374,50 @@ input ItemWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Int
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   user: UserWhereInput
 }
 
