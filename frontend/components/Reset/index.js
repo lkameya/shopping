@@ -21,7 +21,6 @@ Reset.propTypes = {
 }
 
 function Reset({ resetToken }) {
-
   const [inputs, setInputs] = useState({
     password: '',
     confirmPassword: '',

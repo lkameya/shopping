@@ -20,9 +20,8 @@ const Query = {
     if (!ctx.request.userId) {
       throw new Error('You must be logged in!');
     }
-
     hasPermission(ctx.request.user, ['USER']);
-    return ctx.db.query.users({}, info);
+    return ctx.db.query.users({}, info);;
   },
 };
 
