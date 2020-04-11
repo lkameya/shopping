@@ -10,6 +10,7 @@ export const Container = styled.ul`
   list-style-type: none;
   li {
     text-decoration: none;
+    text-transform: uppercase;
   }
   a,
   button {

@@ -1,20 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Nav /> renders 1`] = `
-<div>
-  <Link
-    href="sell"
-  >
-    <a>
-      Sell Page!
-    </a>
-  </Link>
-  <Link
-    href="/"
-  >
-    <a>
-      Home
-    </a>
-  </Link>
-</div>
+<styles__Container>
+  <li>
+    <Link
+      href="/items"
+    >
+      <a>
+        Shop
+      </a>
+    </Link>
+  </li>
+  <li>
+    <Link
+      href="/"
+    >
+      <a>
+        Sell
+      </a>
+    </Link>
+  </li>
+  <li>
+    <Link
+      href="/"
+    >
+      <a>
+        Signup
+      </a>
+    </Link>
+  </li>
+  <li>
+    <Link
+      href="/"
+    >
+      <a>
+        Orders
+      </a>
+    </Link>
+  </li>
+</styles__Container>
 `;
