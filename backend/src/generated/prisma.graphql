@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/leonardo-kameya-477db2/backend/dev
-# timestamp: Sat Apr 11 2020 19:10:49 GMT-0400 (Amazon Standard Time)
+# timestamp: Sat Apr 11 2020 21:46:31 GMT-0400 (Amazon Standard Time)
 
 type AggregateCartItem {
   count: Int!
@@ -330,6 +330,7 @@ type Item implements Node {
   largeImage: String
   price: Int!
   user: User!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -379,6 +380,8 @@ enum ItemOrderByInput {
   largeImage_DESC
   price_ASC
   price_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type ItemPreviousValues {
@@ -388,6 +391,7 @@ type ItemPreviousValues {
   image: String
   largeImage: String
   price: Int!
+  createdAt: DateTime!
 }
 
 type ItemSubscriptionPayload {
@@ -700,6 +704,28 @@ input ItemWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   user: UserWhereInput
 }
 
