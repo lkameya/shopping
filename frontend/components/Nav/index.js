@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Mutation } from 'react-apollo';
 import { TOGGLE_CART_MUTATION } from '../Cart.js';
-import { Container } from './styles';
+import { NavContainer } from './styles';
 import User from '../User';
 import Signout from '../Signout';
 import CartCount from '../CartCount/index.js';
@@ -12,35 +12,38 @@ export default function Nav() {
       {({ data }) => {
         const me = data ? data.me : null
         return (
-          <Container>
-            <li>
+          <NavContainer>
+            <div>
               <Link href="/items">
                 <a>Shop</a>
               </Link>
-            </li>
+            </div>
             {me && (
               <>
-                <li>
+                <div>
                   <Link href="/sell">
                     <a>Sell</a>
                   </Link>
-                </li>
-                <li>
+                </div>
+                <div>
                   <Link href="/orders">
                     <a>Orders</a>
                   </Link>
-                </li>
-                <li>
+                </div>
+                <div>
                   <Signout />
-                  <Mutation mutation={TOGGLE_CART_MUTATION}>
-                    {(toggleCart) => (
-                      <button onClick={toggleCart}>
-                        My Cart
-                        <CartCount count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)}></CartCount>
-                      </button>
-                    )}
-                  </Mutation>
-                </li>
+
+                </div>
+
+                <Mutation mutation={TOGGLE_CART_MUTATION}>
+                  {(toggleCart) => (
+                    <div onClick={toggleCart}>
+                      My Cart
+                      <CartCount count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)}></CartCount>
+                    </div>
+                  )}
+                </Mutation>
+
               </>
             )}
             {!me && (
@@ -50,7 +53,7 @@ export default function Nav() {
                 </Link>
               </li>
             )}
-          </Container>
+          </NavContainer>
         )
       }}
     </User>

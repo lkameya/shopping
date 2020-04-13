@@ -21,17 +21,13 @@ Router.onRouteChangeError = () => {
 export default function Header() {
   return (
     <Container>
-      <div className="bar">
-        <Logo>
-          <Link href="/">
-            <a>wears</a>
-          </Link>
-        </Logo>
-        <Nav />
-      </div>
-      <div className="sub-bar">
-        <Search />
-      </div>
+      <Logo>
+        <Link href="/">
+          <a>.wears</a>
+        </Link>
+      </Logo>
+      <Search />
+      <Nav />
       <Cart />
     </Container>
   );

@@ -1,6 +1,5 @@
 import Header from "../Header";
 import Meta from "../Meta";
-import { StyledButton } from "./styles";
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -12,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   body {
-    font-family: 'Poiret One', sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 1rem;
     margin: 0;
     font-size: 1.5rem;
@@ -22,9 +21,10 @@ const GlobalStyle = createGlobalStyle`
 const theme = {
   colors: {
     black: '#101010',
-    darkgrey: '#646B6D',
-    lightgrey: '#8C9598',
-    white: '#FEFEFE',
+    darkblue: '#303342',
+    lightgrey: '#DEDEE3',
+    darkgrey: '#85868D',
+    white: '#FFFFFF',
   },
 }
 
@@ -33,7 +33,6 @@ export default function Page({ children }) {
     <ThemeProvider theme={theme}>
       <Meta />
       <Header />
-      <StyledButton>Click Me</StyledButton>
       {children}
       <GlobalStyle />
     </ThemeProvider>

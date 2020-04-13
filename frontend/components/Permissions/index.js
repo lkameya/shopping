@@ -2,7 +2,7 @@ import { Query, Mutation } from 'react-apollo';
 import Error from '../_Shared/ErrorMessage';
 import gql from 'graphql-tag';
 import Table from '../_Shared/Table';
-import SickButton from '../_Shared/Button';
+import StyledButton from '../_Shared/Button';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -119,9 +119,9 @@ function UserPermissions({ user }) {
               </td>
             ))}
             <td>
-              <SickButton type="button" disabled={loading}
+              <StyledButton type="button" disabled={loading}
                 onClick={updatePermissions}
-              >Update</SickButton>
+              >Update</StyledButton>
             </td>
           </tr>
         </>

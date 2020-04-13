@@ -48,7 +48,7 @@ function SingleItem({ id }) {
         return (
           <SingleItemStyles>
             <Head>
-              <title>Sick Fits | {item.title}</title>
+              <title>Wears | {item.title}</title>
             </Head>
             <img src={data.item.largeImage} />
             <div className="details">

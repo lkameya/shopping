@@ -4,10 +4,8 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 
 const AnimationStyles = styled.span`
-  position: relative;
   .count {
     display: block;
-    position: relative;
     transition: all 0.4s;
     backface-visibility: hidden;
   }
@@ -29,16 +27,14 @@ const AnimationStyles = styled.span`
 `;
 
 const Dot = styled.div`
-  background: ${props => props.theme.red};
+  background: ${props => props.theme.colors.darkblue};
   color: white;
   border-radius: 50%;
   padding: 0.5rem;
   line-height: 2rem;
-  min-width: 3rem;
-  margin-left: 1rem;
-  font-weight: 100;
-  font-feature-settings: 'tnum';
-  font-variant-numeric: tabular-nums;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.1rem;
 `;
 
 const CartCount = ({ count }) => (
