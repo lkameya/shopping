@@ -4,6 +4,7 @@ import NProgress from 'nprogress';
 import Nav from "../Nav";
 import { Container, Logo } from "./styles";
 import Cart from '../Cart.js';
+import Search from '../Search';
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -29,7 +30,7 @@ export default function Header() {
         <Nav />
       </div>
       <div className="sub-bar">
-        <p>Search</p>
+        <Search />
       </div>
       <Cart />
     </Container>

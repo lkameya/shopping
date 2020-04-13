@@ -36,9 +36,11 @@ const SINGLE_ITEM_QUERY = gql`
 `;
 
 function SingleItem({ id }) {
+  console.log(id);
   return (
     <Query query={SINGLE_ITEM_QUERY} variables={{ id }}>
       {({ error, loading, data }) => {
+        if (!data) return null;
         const { item } = data;
         if (error) return <Error error={error} />;
         if (loading) return <p>Loading!</p>;
