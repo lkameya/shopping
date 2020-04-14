@@ -8,6 +8,9 @@ const AnimationStyles = styled.span`
     display: block;
     transition: all 0.4s;
     backface-visibility: hidden;
+    position: absolute;
+    top:0;
+    right: 0;
   }
   /* Initial State of the entered Dot */
   .count-enter {

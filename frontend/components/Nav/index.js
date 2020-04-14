@@ -38,7 +38,7 @@ export default function Nav() {
                 <Mutation mutation={TOGGLE_CART_MUTATION}>
                   {(toggleCart) => (
                     <div onClick={toggleCart}>
-                      My Cart
+                      My cart
                       <CartCount count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)}></CartCount>
                     </div>
                   )}
@@ -49,7 +49,7 @@ export default function Nav() {
             {!me && (
               <li>
                 <Link href="/signup">
-                  <a>Sign In</a>
+                  <a>sign in</a>
                 </Link>
               </li>
             )}

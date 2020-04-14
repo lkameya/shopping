@@ -23,12 +23,16 @@ const DropDownItem = styled.div`
 
 
 const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
   width: 500px;
-  margin-left: 200px;
+  margin: 0 auto;
+  position: relative;
   input {
-    padding: .7rem 2rem;
-    width: 90%;
+    padding: 2rem 2rem;
+    width: 500px;
     transition: all .2s;
+    line-height:2rem;
   }
 `;
 

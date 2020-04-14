@@ -2,18 +2,15 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
   font-size: 1.4rem;
-  height: 7rem;
   background-color: #fff;
   display: flex;
+  //position: fixed;
   justify-content: space-between;
   align-items: center;
 `;
 
 export const Logo = styled.h1`
   font-size: 4rem;
-  margin-left: 2rem;
-  position: relative;
-  z-index: 2;
   a {
     padding: 0.5rem 1rem;
     color: ${props => props.theme.colors.black};

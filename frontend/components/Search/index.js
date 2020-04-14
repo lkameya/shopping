@@ -29,9 +29,8 @@ function Search() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    resetIdCounter();
-  }, []);
+  resetIdCounter();
+
 
   const onChange = debounce(async (e, client) => {
     console.log('Searching...');
