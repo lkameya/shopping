@@ -20,37 +20,42 @@ const ALL_ITEMS_QUERY = gql`
 `;
 
 const Center = styled.div`
-  text-align: center;
+    width: 100%;
 `;
 
 const ItemsList = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 60px;
-  max-width: ${props => props.theme.maxWidth};
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr) );
+  grid-gap: 10px;
+
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr) );
+    grid-gap: 30px;
+  }
 `;
 
 function Items({ page }) {
   return (
-    <Center>
-      <Query
-        query={ALL_ITEMS_QUERY}
-        fetchPolicy="network-only"
-        variables={{
-          skip: page * perPage - perPage,
-        }}
-      >
-        {({ data, error, loading }) => {
-          if (loading) return <p>Loading...</p>;
-          if (error) return <p>Error: {error.message}</p>;
-          return (
-            <ItemsList>{data.items.map(item => <Item item={item} key={item.id} />)}</ItemsList>
-          );
-        }}
-      </Query>
-      <Pagination page={page} />
-    </Center>
+    <Query
+      query={ALL_ITEMS_QUERY}
+      fetchPolicy="network-only"
+      variables={{
+        skip: page * perPage - perPage,
+      }}
+    >
+      {({ data, error, loading }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error: {error.message}</p>;
+        return (
+          <Center>
+            <ItemsList>
+              {data.items.map(item =>
+                <Item item={item} key={item.id} />)}
+            </ItemsList>
+          </Center>
+        );
+      }}
+    </Query>
   )
 }
 

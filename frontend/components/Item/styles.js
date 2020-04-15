@@ -4,20 +4,26 @@ export const Container = styled.div`
   background: white;
   box-shadow: ${props => props.theme.bs};
   position: relative;
+  border: 1px solid transparent;
   display: flex;
   flex-direction: column;
   max-width: 300px;
   max-height: 300px;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid black;
+  }
+
   img {
-    width: 100%;
-    object-fit: fit;
+    height: 200px;
+    margin-bottom: 2rem;
   }
   p {
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 1.4rem;
     line-height: 2;
     font-weight: 500;
     flex-grow: 1;
-    padding: 0 3rem;
   }
   /* .buttonList {
     display: grid;

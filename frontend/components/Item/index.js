@@ -13,7 +13,8 @@ function Item({ item }) {
   return (
     <Container>
       {item.image && <img src={item.image} alt={item.title} />}
-      <p>{item.description}</p>
+      <span>{item.description}</span>
+      <span>{item.price}</span>
       <div>
         <Link
           href={{
@@ -23,7 +24,7 @@ function Item({ item }) {
         >
           <a>Edit ✏️</a>
         </Link>
-        <AddToCart id={item.id} />
+        {/* <AddToCart id={item.id} /> */}
         <DeleteItem id={item.id}>Delete This Item</DeleteItem>
       </div>
     </Container>

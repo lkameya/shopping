@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import Nav from "../Nav";
-import { Container, Logo } from "./styles";
+import { Container, Logo, BarContainer } from "./styles";
 import Cart from '../Cart.js';
 import Search from '../Search';
 
@@ -26,9 +26,11 @@ export default function Header() {
           <a>.wears</a>
         </Link>
       </Logo>
-      <Search />
-      <Nav />
+      <BarContainer>
+        <Search />
+        <Nav />
+      </BarContainer>
       <Cart />
-    </Container>
+    </Container >
   );
 }

@@ -25,10 +25,23 @@ const DropDownItem = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 500px;
-  margin: 0 auto;
+  width: 300px;
   position: relative;
+  padding: 1rem;
+
   input {
+  padding: 2rem 2rem;
+  width: 450px;
+  transition: all .2s;
+  line-height:2rem;
+  
+  @media (min-width: 1025px) {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+    input {
     padding: 2rem 2rem;
     width: 500px;
     transition: all .2s;

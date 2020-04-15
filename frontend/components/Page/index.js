@@ -1,6 +1,7 @@
 import Header from "../Header";
 import Meta from "../Meta";
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import Filter from "../Filter";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -18,6 +19,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  @media (min-width: 1025px) {
+    flex-direction: row;
+  }
+`;
+
+
 const theme = {
   colors: {
     black: '#101010',
@@ -33,7 +44,10 @@ export default function Page({ children }) {
     <ThemeProvider theme={theme}>
       <Meta />
       <Header />
-      {children}
+      <MainContainer>
+        <Filter />
+        {children}
+      </MainContainer>
       <GlobalStyle />
     </ThemeProvider>
   );
