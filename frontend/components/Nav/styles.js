@@ -1,41 +1,24 @@
 import styled from 'styled-components';
 
-export const Container = styled.ul`
-  margin: 0;
-  padding: 0;
+export const NavContainer = styled.nav`
   display: flex;
-  justify-self: end;
-  font-size: 2rem;
-  text-decoration: none;
-  list-style-type: none;
-  li {
-    text-decoration: none;
-  }
-  a,
-  button {
-    padding: 1rem 3rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    text-decoration: none;
+  list-style: none;
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
+
+  div{
+    position:relative;
+    padding: 0 2rem;
     cursor: pointer;
-    color: ${props => props.theme.black};
-    @media (max-width: 700px) {
-      font-size: 2rem;
-      padding: 0 10px;
+    display:flex;
+    align-items:center;
+    height:100%;
+
+
+    a {
+      text-decoration: none;
+      display: flex;
     }
-    &:hover,
-    &:focus {
-      outline: none;
-      &:after {
-        width: calc(100% - 60px);
-      }
-    }
-  }
-  @media (max-width: 1300px) {
-    border-top: 1px solid ${props => props.theme.lightgrey};
-    width: 100%;
-    justify-content: center;
-    font-size: 1.5rem;
   }
 `;

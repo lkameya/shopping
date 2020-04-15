@@ -1,34 +1,41 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-  .bar {
-    border-bottom: 1px solid ${props => props.theme.colors.lightgrey};
-    display: grid;
-    grid-template-columns: auto 1fr;
+  margin: 0;
+  text-align: center;
+  flex-direction: column;
+
+  @media (min-width: 1025px) {
+    font-size: 1.4rem;
+    background-color: #fff;
+    display: flex;
     justify-content: space-between;
-    align-items: stretch;
-    @media (max-width: 1300px) {
-      grid-template-columns: 1fr;
-      justify-content: center;
-    }
+    flex-direction: row;
+    align-items: center;
   }
-  .sub-bar {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    border-bottom: 1px solid ${props => props.theme.colors.lightgrey};
+`;
+
+export const BarContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  flex-direction: column-reverse;
+  margin: 1rem 0;
+
+  @media (min-width: 1025px) {
+    font-size: 1.4rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
   }
 `;
 
 export const Logo = styled.h1`
   font-size: 4rem;
-  font-family: 'Poiret One', cursive;
-  margin-left: 2rem;
-  position: relative;
-  z-index: 2;
   a {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 3rem;
     color: ${props => props.theme.colors.black};
-    text-transform: uppercase;
+    text-transform: lowercase;
     text-decoration: none;
   }
   @media (max-width: 1300px) {

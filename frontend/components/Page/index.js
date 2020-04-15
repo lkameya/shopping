@@ -1,7 +1,7 @@
 import Header from "../Header";
 import Meta from "../Meta";
-import { StyledButton } from "./styles";
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import Filter from "../Filter";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -12,19 +12,30 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   body {
-    font-family: 'Poiret One', sans-serif;
-    padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
     margin: 0;
     font-size: 1.5rem;
   }
 `;
 
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  @media (min-width: 1025px) {
+    flex-direction: row;
+  }
+`;
+
+
 const theme = {
   colors: {
     black: '#101010',
-    darkgrey: '#646B6D',
-    lightgrey: '#8C9598',
-    white: '#FEFEFE',
+    darkblue: '#303342',
+    lightgrey: '#DEDEE3',
+    darkgrey: '#85868D',
+    white: '#FFFFFF',
   },
 }
 
@@ -33,8 +44,10 @@ export default function Page({ children }) {
     <ThemeProvider theme={theme}>
       <Meta />
       <Header />
-      <StyledButton>Click Me</StyledButton>
-      {children}
+      <MainContainer>
+        <Filter />
+        {children}
+      </MainContainer>
       <GlobalStyle />
     </ThemeProvider>
   );

@@ -2,7 +2,9 @@ import Link from 'next/link';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import Nav from "../Nav";
-import { Container, Logo } from "./styles";
+import { Container, Logo, BarContainer } from "./styles";
+import Cart from '../Cart.js';
+import Search from '../Search';
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -19,18 +21,16 @@ Router.onRouteChangeError = () => {
 export default function Header() {
   return (
     <Container>
-      <div className="bar">
-        <Logo>
-          <Link href="/">
-            <a>wears</a>
-          </Link>
-        </Logo>
+      <Logo>
+        <Link href="/">
+          <a>.wears</a>
+        </Link>
+      </Logo>
+      <BarContainer>
+        <Search />
         <Nav />
-      </div>
-      <div className="sub-bar">
-        <p>Search</p>
-      </div>
-      <div>Cart</div>
-    </Container>
+      </BarContainer>
+      <Cart />
+    </Container >
   );
 }

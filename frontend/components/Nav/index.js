@@ -1,29 +1,61 @@
 import Link from 'next/link';
-import { Container } from './styles';
+import { Mutation } from 'react-apollo';
+import { TOGGLE_CART_MUTATION } from '../Cart.js';
+import { NavContainer } from './styles';
+import User from '../User';
+import Signout from '../Signout';
+import CartCount from '../CartCount/index.js';
 
 export default function Nav() {
   return (
-    <Container>
-      <li>
-        <Link href="sell">
-          <a>Shop</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Sell</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Signup</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="/">
-          <a>Orders</a>
-        </Link>
-      </li>
-    </Container>
+    <User>
+      {({ data }) => {
+        const me = data ? data.me : null
+        return (
+          <NavContainer>
+            <div>
+              <Link href="/items">
+                <a>Shop</a>
+              </Link>
+            </div>
+            {me && (
+              <>
+                <div>
+                  <Link href="/sell">
+                    <a>Sell</a>
+                  </Link>
+                </div>
+                <div>
+                  <Link href="/orders">
+                    <a>Orders</a>
+                  </Link>
+                </div>
+                <div>
+                  <Signout />
+
+                </div>
+
+                <Mutation mutation={TOGGLE_CART_MUTATION}>
+                  {(toggleCart) => (
+                    <div onClick={toggleCart}>
+                      My cart
+                      <CartCount count={me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0)}></CartCount>
+                    </div>
+                  )}
+                </Mutation>
+
+              </>
+            )}
+            {!me && (
+              <li>
+                <Link href="/signup">
+                  <a>sign in</a>
+                </Link>
+              </li>
+            )}
+          </NavContainer>
+        )
+      }}
+    </User>
   );
 }

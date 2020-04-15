@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Meta /> renders 1`] = `
+<Head>
+  <meta
+    content="width=device-width, initial-scale=1"
+    name="viewport"
+  />
+  <meta
+    charSet="utf8"
+  />
+  <link
+    href="/static/favicon.png"
+    rel="shortcupt icon"
+  />
+  <link
+    href="/static/nprogress.css"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Quicksand&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap"
+    rel="stylesheet"
+  />
+  <title>
+    gems
+  </title>
+</Head>
+`;
