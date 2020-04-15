@@ -7,3 +7,9 @@ haters/
 layout.md
 variables.env
 prisma/
+
+#deployment files
+backend/.gitignore
+frontend/.gitignore
+frontend/Procfile
+frontend/app.json
