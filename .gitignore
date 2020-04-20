@@ -12,4 +12,3 @@ prisma/
 backend/.gitignore
 frontend/.gitignore
 frontend/Procfile
-frontend/app.json

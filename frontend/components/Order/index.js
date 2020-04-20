@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
-import { format } from 'date-fns';
 import Head from 'next/head';
 import gql from 'graphql-tag';
 import formatMoney from '../../lib/formatMoney';
@@ -53,10 +52,6 @@ function Order({ id }) {
             <p>
               <span>Charge</span>
               <span>{order.charge}</span>
-            </p>
-            <p>
-              <span>Date</span>
-              {/* <span>{format(order.createdAt, 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true })}</span> */}
             </p>
             <p>
               <span>Order Total</span>
