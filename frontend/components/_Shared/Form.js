@@ -15,36 +15,33 @@ const loading = keyframes`
 const Form = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
   background: rgba(0, 0, 0, 0.02);
-  border: 5px solid white;
-  padding: 20px;
-  font-size: 1.5rem;
+  padding: 5rem;
+  font-size: 2rem;
   line-height: 1.5;
-  font-weight: 600;
   label {
     display: block;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+
   }
   input,
   textarea,
   select {
     width: 100%;
     padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid black;
-    &:focus {
-      outline: 0;
-      border-color: ${props => props.theme.red};
-    }
+    font-size: 2rem;
+    height: 50px;
+    
   }
   button,
   input[type='submit'] {
-    width: auto;
-    background: ${props => props.theme.colors.black};;
+    width: 100%;
+    background: ${props => props.theme.colors.darkblue};
     color: white;
     border: 0;
     font-size: 2rem;
     font-weight: 600;
-    padding: 0.5rem 1.2rem;
+    padding: 1rem 1.2rem;
     cursor: pointer;
   }
   fieldset {
@@ -55,16 +52,20 @@ const Form = styled.form`
       opacity: 0.5;
     }
     &::before {
-      height: 10px;
+      height: 2px;
       content: '';
       display: block;
-      background-image: linear-gradient(to right, #ff3019 0%, #e2b04a 50%, #ff3019 100%);
+      background-image: linear-gradient(to right, #303342 0%, #DEDEE3 50%, #303342 100%);
     }
     &[aria-busy='true']::before {
       background-size: 50% auto;
       animation: ${loading} 0.5s linear infinite;
     }
   }
+  h2 {
+    text-align:center;
+  }
 `;
+
 
 export default Form;

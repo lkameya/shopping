@@ -3,11 +3,23 @@ import styled from 'styled-components';
 export const ItemContainer = styled.div`
   display: flex;
   width: 100%;
+  flex-direction: column;
+
+  @media (min-width: 1025px) {
+    flex-direction: row;
+    width: 100%;
+  }
 
   img {
-    width: 50%;
+    width: 100%;
     object-fit: contain;
+    @media (min-width: 1025px) {
+      width: 50%;
+      object-fit: contain;
+    }
   }
+
+
 
   h2 {
     text-transform: uppercase;
@@ -26,12 +38,16 @@ export const ItemContainer = styled.div`
 
 
   .details {
-    width: 100%;
+    width: 90%;
     margin: 0 5rem;
     font-size: 2rem;
     button {
     margin: 3rem 0;
   }
+  @media (min-width: 1025px) {
+      width: 100%;
+    }
+  
 
   }
 `;

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import Error from '../_Shared/ErrorMessage';
 import styled from 'styled-components';
 import Head from 'next/head';
 import { ItemContainer } from './styles';
 import AddToCart from '../AddToCart';
 import formatMoney from '../../lib/formatMoney';
+import { TOGGLE_CART_MUTATION } from '../Cart.js';
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;

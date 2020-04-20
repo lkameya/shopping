@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Form from '../_Shared/Form';
 import Error from '../_Shared/ErrorMessage';
 import { CURRENT_USER_QUERY } from '../User';
+import { RegisterContainer } from './styles';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
@@ -34,50 +35,52 @@ function Signup() {
       refetchQueries={[{ query: CURRENT_USER_QUERY }]}
     >
       {(signup, { error, loading }) => (
-        <Form
-          method="post"
-          onSubmit={async e => {
-            e.preventDefault();
-            await signup();
-            setInputs({ name: '', email: '', password: '' });
-          }}
-        >
-          <fieldset disabled={loading} aria-busy={loading}>
-            <h2>Sign Up for An Account</h2>
-            <Error error={error} />
-            <label htmlFor="email">
-              Email
-                <input
-                type="email"
-                name="email"
-                placeholder="email"
-                value={inputs.email}
-                onChange={saveToState}
-              />
-            </label>
-            <label htmlFor="name">
-              Name
-                <input
-                type="text"
-                name="name"
-                placeholder="name"
-                value={inputs.name}
-                onChange={saveToState}
-              />
-            </label>
-            <label htmlFor="password">
-              Password
-                <input
-                type="password"
-                name="password"
-                placeholder="password"
-                value={inputs.password}
-                onChange={saveToState}
-              />
-            </label>
-            <button type="submit">Sign Up!</button>
-          </fieldset>
-        </Form>
+        <RegisterContainer>
+          <Form
+            method="post"
+            onSubmit={async e => {
+              e.preventDefault();
+              await signup();
+              setInputs({ name: '', email: '', password: '' });
+            }}
+          >
+            <fieldset disabled={loading} aria-busy={loading}>
+              <h2>Sign Up for An Account</h2>
+              <Error error={error} />
+              <label htmlFor="email">
+                Email
+                  <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  value={inputs.email}
+                  onChange={saveToState}
+                />
+              </label>
+              <label htmlFor="name">
+                Name
+                  <input
+                  type="text"
+                  name="name"
+                  placeholder="name"
+                  value={inputs.name}
+                  onChange={saveToState}
+                />
+              </label>
+              <label htmlFor="password">
+                Password
+                  <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  value={inputs.password}
+                  onChange={saveToState}
+                />
+              </label>
+              <button type="submit">Sign Up!</button>
+            </fieldset>
+          </Form>
+        </RegisterContainer>
       )}
     </Mutation>
   );

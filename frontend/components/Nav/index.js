@@ -48,7 +48,7 @@ export default function Nav() {
             )}
             {!me && (
               <div>
-                <Link href="/signup">
+                <Link href="/login">
                   <a>Sign in</a>
                 </Link>
               </div>
