@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import Error from '../_Shared/ErrorMessage';
 import styled from 'styled-components';
 import Head from 'next/head';
+import { ItemContainer } from './styles';
+import AddToCart from '../AddToCart';
+import formatMoney from '../../lib/formatMoney';
+import { TOGGLE_CART_MUTATION } from '../Cart.js';
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;
@@ -29,6 +33,7 @@ const SINGLE_ITEM_QUERY = gql`
     item(where: { id: $id }) {
       id
       title
+      price
       description
       largeImage
     }
@@ -46,16 +51,19 @@ function SingleItem({ id }) {
         if (loading) return <p>Loading!</p>;
         if (!data.item) return <p>No item found!</p>;
         return (
-          <SingleItemStyles>
+          <ItemContainer>
             <Head>
               <title>Wears | {item.title}</title>
             </Head>
             <img src={data.item.largeImage} />
             <div className="details">
-              <h2>Viewing {item.title}</h2>
-              <p>{item.description}</p>
+              <h4>{formatMoney(item.price)}</h4>
+              <hr />
+              <h2>{item.title}</h2>
+              <span>{item.description}</span>
+              <AddToCart id={item.id} />
             </div>
-          </SingleItemStyles>
+          </ItemContainer>
         )
       }}
     </Query>

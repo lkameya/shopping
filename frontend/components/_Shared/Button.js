@@ -9,11 +9,11 @@ const StyledButton = styled.button`
   text-transform: lowercase;
   font-size: 1.2rem;
   width: 200px;
-  height: 100%;
   padding: .8rem 7rem .8rem 0;
   letter-spacing: .1rem;
-  display: inline-block;
   transition: all 0.5s;
+  display: block;
+
   cursor: pointer;
 
   &[disabled] {

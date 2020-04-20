@@ -47,11 +47,11 @@ export default function Nav() {
               </>
             )}
             {!me && (
-              <li>
-                <Link href="/signup">
-                  <a>sign in</a>
+              <div>
+                <Link href="/login">
+                  <a>Sign in</a>
                 </Link>
-              </li>
+              </div>
             )}
           </NavContainer>
         )
