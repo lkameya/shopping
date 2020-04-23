@@ -1,8 +1,8 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
+import { Mutation } from '@apollo/react-components';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User';
 
 const REMOVE_FROM_CART_MUTATION = gql`

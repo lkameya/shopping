@@ -1,9 +1,10 @@
 import withApollo from 'next-with-apollo';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { getDataFromTree } from '@apollo/react-ssr';
 import { endpoint, prodEndpoint } from '../config';
 import { LOCAL_STATE_QUERY } from '../components/Cart.js';
 
-function createClient({ headers }) {
+function createClient({ headers, initialState }) {
   return new ApolloClient({
     uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
     request: operation => {
@@ -36,6 +37,7 @@ function createClient({ headers }) {
         cartOpen: true,
       },
     },
+    cache: new InMemoryCache({}).restore(initialState || {}),
   });
 }
 

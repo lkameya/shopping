@@ -1,5 +1,5 @@
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Mutation } from '@apollo/react-components';
+import { gql } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User';
 import StyledButton from '../_Shared/Button';
 

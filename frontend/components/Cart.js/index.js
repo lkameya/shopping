@@ -1,6 +1,6 @@
 import React from 'react';
-import { Query, Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Query, Mutation } from '@apollo/react-components';
+import { gql } from '@apollo/client';
 import { adopt } from 'react-adopt';
 import User from '../User';
 import CartContainer from './styles';

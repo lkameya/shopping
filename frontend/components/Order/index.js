@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
+import { Query } from '@apollo/react-components';
 import Head from 'next/head';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import formatMoney from '../../lib/formatMoney';
 import Error from '../_Shared/ErrorMessage';
 import OrderContainer from './styles';

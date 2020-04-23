@@ -1,9 +1,9 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
-import { Mutation } from 'react-apollo';
+import { Mutation } from '@apollo/react-components';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import calcTotalPrice from '../../lib/calcTotalPrice';
 import User, { CURRENT_USER_QUERY } from '../User';
 

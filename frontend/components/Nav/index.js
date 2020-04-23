@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Mutation } from 'react-apollo';
+import { Mutation } from '@apollo/react-components';
 import { TOGGLE_CART_MUTATION } from '../Cart.js';
 import { NavContainer } from './styles';
 import User from '../User';

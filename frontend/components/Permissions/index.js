@@ -1,6 +1,6 @@
-import { Query, Mutation } from 'react-apollo';
+import { Query, Mutation } from '@apollo/react-components';
 import Error from '../_Shared/ErrorMessage';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import Table from '../_Shared/Table';
 import StyledButton from '../_Shared/Button';
 import PropTypes from 'prop-types';

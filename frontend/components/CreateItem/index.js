@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Mutation } from '@apollo/react-components';
+import { gql } from '@apollo/client';
 import Router from 'next/router';
 import Form from '../_Shared/Form';
 import Error from '../_Shared/ErrorMessage';

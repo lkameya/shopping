@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Mutation } from '@apollo/react-components';
+import { gql } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User';
 
 const SIGN_OUT_MUTATION = gql`
