@@ -1,6 +1,7 @@
 import { gql, useMutation } from '@apollo/client';
-import { CURRENT_USER_QUERY } from '../User';
+import { CURRENT_USER_QUERY } from '../../hooks/useCurrentUser';
 import StyledButton from '../_Shared/Button';
+import ErrorMessage from '../_Shared/ErrorMessage';
 
 const ADD_TO_CART_MUTATION = gql`
   mutation addToCart($id: ID!) {
@@ -12,15 +13,18 @@ const ADD_TO_CART_MUTATION = gql`
 `;
 
 function AddToCart({ id }) {
-  const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
+  const [addToCart, { loading, error }] = useMutation(ADD_TO_CART_MUTATION, {
     variables: { id },
-    refetchQueries: [{ query: CURRENT_USER_QUERY }]
+    refetchQueries: () => [{ query: CURRENT_USER_QUERY }]
   });
 
   return (
-    <StyledButton disabled={loading} onClick={addToCart}>
-      Add{loading && 'ing'} to cart
-    </StyledButton>
+    <>
+      <StyledButton disabled={loading} onClick={addToCart}>
+        Add{loading && 'ing'} to cart
+      </StyledButton>
+      {error && <ErrorMessage error={error} />}
+    </>
   );
 }
 

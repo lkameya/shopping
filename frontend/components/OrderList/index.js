@@ -29,7 +29,7 @@ function OrderList() {
 
   if (!data) return null;
   const orders = data.orders;
-  if (loading) return <p>loading...</p>;
+  if (loading) return null;
   if (error) return <Error erorr={error} />;
 
   return (

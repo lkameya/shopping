@@ -1,24 +1,9 @@
 require('dotenv').config({ path: 'variables.env' });
 const createServer = require('./createServer');
-const db = require('./db');
 
 const server = createServer();
 
-// decode the JWT so we can get the user Id on each request
-
-// server.express.use((req, res, next) => {
-//   const { token } = req.cookies;
-
-//   if (token) {
-//     const { userId } = jwt.verify(token, process.env.APP_SECRET);
-//     // put the userId onto the req for future requests to access
-//     req.userId = userId;
-//   }
-//   next();
-// });
-
-
-//2. Create a middleware that populates the user on each request
+// TODO: maybe create a middleware to populate user ?
 // server.express.use(async (req, res, next) => {
 //   const userId = getUserId(ctx);
 //   if (!userId) return next();

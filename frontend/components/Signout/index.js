@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
-import { CURRENT_USER_QUERY } from '../User';
+import { CURRENT_USER_QUERY } from '../../hooks/useCurrentUser';
+import Router from 'next/router';
 
 const SIGN_OUT_MUTATION = gql`
   mutation SIGN_OUT_MUTATION {
@@ -11,8 +12,8 @@ const SIGN_OUT_MUTATION = gql`
 
 function Signout() {
   const [signout] = useMutation(SIGN_OUT_MUTATION, {
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    onCompleted: () => localStorage.removeItem('token')
+    refetchQueries: () => [{ query: CURRENT_USER_QUERY }],
+    onCompleted: () => localStorage.removeItem('token') || Router.push({ pathname: '/login' }),
   })
 
   return (

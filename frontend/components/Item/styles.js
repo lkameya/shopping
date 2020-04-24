@@ -10,13 +10,16 @@ export const Container = styled.div`
   max-width: 300px;
   max-height: 300px;
   cursor: pointer;
+
   &:hover {
     border: 1px solid black;
   }
 
   img {
     height: 200px;
-    margin-bottom: 2rem;
+    &:hover {
+      opacity: 0.5;
+    }
   }
   p {
     font-family: Helvetica, Arial, sans-serif;
@@ -24,6 +27,24 @@ export const Container = styled.div`
     line-height: 2;
     font-weight: 500;
     flex-grow: 1;
+  }
+
+  .priceHover {
+    position: absolute;
+    background-color: #fff;
+    padding: .4rem .7rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    z-index: 2;
   }
   /* .buttonList {
     display: grid;

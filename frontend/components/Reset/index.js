@@ -4,7 +4,7 @@ import { gql, useMutation } from '@apollo/client';
 import Proptypes from 'prop-types';
 import Form from '../_Shared/Form';
 import Error from '../_Shared/ErrorMessage';
-import { CURRENT_USER_QUERY } from '../User';
+import { CURRENT_USER_QUERY } from '../../hooks/useCurrentUser';
 
 const RESET_MUTATION = gql`
   mutation RESET_MUTATION($resetToken: String!, $password: String!, $confirmPassword: String!) {

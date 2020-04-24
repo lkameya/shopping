@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Mutation } from '@apollo/react-components';
 import { gql, useMutation } from '@apollo/client';
 import Form from '../_Shared/Form';
 import Error from '../_Shared/ErrorMessage';
-import { CURRENT_USER_QUERY } from '../User';
+import { CURRENT_USER_QUERY } from '../../hooks/useCurrentUser';
 import { RegisterContainer } from './styles';
+import Router from 'next/router';
+import Loading from '../_Shared/Loading';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
     signup(email: $email, name: $name, password: $password) {
-      id
-      email
-      name
+      token
     }
   }
 `;
@@ -34,6 +33,8 @@ function Signup() {
     setInputs(inputs => ({ ...inputs, [name]: value }));
   };
 
+  if (loading) return <Loading />;
+
   return (
     <RegisterContainer>
       <Form
@@ -45,7 +46,7 @@ function Signup() {
         }}
       >
         <fieldset disabled={loading} aria-busy={loading}>
-          <h2>Sign Up for An Account</h2>
+          <h2>Register</h2>
           <Error error={error} />
           <label htmlFor="email">
             Email

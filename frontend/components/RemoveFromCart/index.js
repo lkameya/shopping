@@ -1,8 +1,7 @@
 import React from 'react';
-import { Mutation } from '@apollo/react-components';
 import PropTypes from 'prop-types';
 import { gql, useMutation } from '@apollo/client';
-import { CURRENT_USER_QUERY } from '../User';
+import { CURRENT_USER_QUERY } from '../../hooks/useCurrentUser';
 import { BigButton } from './styles';
 
 const REMOVE_FROM_CART_MUTATION = gql`
@@ -24,9 +23,10 @@ function RemoveFromCart({ id }) {
     update(cache, payload) {
       const data = cache.readQuery({ query: CURRENT_USER_QUERY });
       const cartItemId = payload.data.removeFromCart.id;
-      data.me.cart = data.me.cart.filter(cartItem => cartItem.id !== cartItemId);
-      cache.writeQuery({ query: CURRENT_USER_QUERY, data });
+      const newData = data.me.cart.filter(cartItem => cartItem.id !== cartItemId);
+      cache.writeQuery({ query: CURRENT_USER_QUERY, newData });
     },
+    refetchQueries: () => [{ query: CURRENT_USER_QUERY }],
     optimisticResponse: {
       __typename: 'Mutation',
       removeFromCart: {

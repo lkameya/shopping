@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
 const { transport, makeANiceEmail } = require('../mail');
-const { hasPermission, getUserId } = require('../utils');
+const { hasPermission, getUserId, isLoggedIn } = require('../utils');
 const stripe = require('../stripe');
 
 const Mutations = {
@@ -49,13 +49,9 @@ const Mutations = {
       '{ id, permissions, email, name }'
     );
 
-    console.log(user);
-
     const where = { id: args.id };
     const item = await ctx.db.query.item({ where }, `{ id title user { id }}`);
     const ownsItem = item.user.id === userId;
-
-    console.log(item);
 
     const hasPermissions = user.permissions.some(permission =>
       ['ADMIN', 'ITEMDELETE'].includes(permission)

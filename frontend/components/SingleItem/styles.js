@@ -10,16 +10,19 @@ export const ItemContainer = styled.div`
     width: 100%;
   }
 
-  img {
+ div {
+   text-align: center;
+   img {
     width: 100%;
-    object-fit: contain;
+    max-width: 600px;
+    object-fit: contains;
     @media (min-width: 1025px) {
-      width: 50%;
+      width: 100%;
       object-fit: contain;
     }
   }
-
-
+ }
+ 
 
   h2 {
     text-transform: uppercase;
@@ -36,8 +39,15 @@ export const ItemContainer = styled.div`
     margin: 0;
   }
 
+  .imageContainer {
+    width: 100%;
+    @media (min-width: 1025px) {
+        width: 100%;
+    }
+  }
 
   .details {
+    text-align: justify;
     width: 90%;
     margin: 0 5rem;
     font-size: 2rem;
@@ -47,7 +57,5 @@ export const ItemContainer = styled.div`
   @media (min-width: 1025px) {
       width: 100%;
     }
-  
-
   }
 `;

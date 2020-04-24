@@ -4,8 +4,9 @@ import Router from 'next/router';
 import Link from 'next/link';
 import Form from '../_Shared/Form';
 import Error from '../_Shared/ErrorMessage';
-import { CURRENT_USER_QUERY } from '../User';
+import { CURRENT_USER_QUERY } from '../../hooks/useCurrentUser';
 import { LoginContainer } from './styles';
+import Loading from '../_Shared/Loading';
 
 const SIGN_IN_MUTATION = gql`
   mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
@@ -23,7 +24,7 @@ function Signin(props) {
 
   const [signin, { loading, error, data }] = useMutation(SIGN_IN_MUTATION, {
     variables: inputs,
-    refetchQueries: (data) => [{ query: CURRENT_USER_QUERY }],
+    refetchQueries: () => [{ query: CURRENT_USER_QUERY }],
     onCompleted: ({ signin: { token } }) => localStorage.setItem('token', token) || Router.push({ pathname: '/items' }),
   });
 
@@ -37,6 +38,8 @@ function Signin(props) {
     await signin();
     setInputs({ email: '', password: '' });
   };
+
+  if (loading) return <Loading />;
 
   return (
     <LoginContainer>

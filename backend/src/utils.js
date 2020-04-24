@@ -23,8 +23,20 @@ function getUserId(context) {
     const { userId } = jwt.verify(token, process.env.APP_SECRET);
     return userId;
   }
-  throw new Error('Not authenticated')
+
+  throw new Error('You must be logged in to perform this action!');
+}
+
+function isLoggedIn(context) {
+  const Authorization = context.request.get('Authorization');
+  if (Authorization) {
+    const token = Authorization.replace('Bearer ', '');
+    const { userId } = jwt.verify(token, process.env.APP_SECRET);
+    return userId;
+  }
+  return null;
 }
 
 exports.hasPermission = hasPermission;
 exports.getUserId = getUserId;
+exports.isLoggedIn = isLoggedIn;

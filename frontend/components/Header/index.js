@@ -23,7 +23,7 @@ export default function Header() {
     <Container>
       <Logo>
         <Link href="/">
-          <a>.wears</a>
+          <a>.thriftstore.</a>
         </Link>
       </Logo>
       <BarContainer>
