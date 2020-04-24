@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mutation } from '@apollo/react-components';
-import { gql } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import Form from '../_Shared/Form';
 import Error from '../_Shared/ErrorMessage';
 import { CURRENT_USER_QUERY } from '../User';
@@ -23,66 +23,64 @@ function Signup() {
     password: '',
   });
 
+  const [signup, { loading, error, data }] = useMutation(SIGNUP_MUTATION, {
+    variables: inputs,
+    refetchQueries: (data) => [{ query: CURRENT_USER_QUERY }],
+    onCompleted: ({ signup: { token } }) => localStorage.setItem('token', token) || Router.push({ pathname: '/items' }),
+  });
+
   const saveToState = e => {
     const { name, value } = e.target;
     setInputs(inputs => ({ ...inputs, [name]: value }));
   };
 
   return (
-    <Mutation
-      mutation={SIGNUP_MUTATION}
-      variables={inputs}
-      refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-    >
-      {(signup, { error, loading }) => (
-        <RegisterContainer>
-          <Form
-            method="post"
-            onSubmit={async e => {
-              e.preventDefault();
-              await signup();
-              setInputs({ name: '', email: '', password: '' });
-            }}
-          >
-            <fieldset disabled={loading} aria-busy={loading}>
-              <h2>Sign Up for An Account</h2>
-              <Error error={error} />
-              <label htmlFor="email">
-                Email
+    <RegisterContainer>
+      <Form
+        method="post"
+        onSubmit={async e => {
+          e.preventDefault();
+          await signup();
+          setInputs({ name: '', email: '', password: '' });
+        }}
+      >
+        <fieldset disabled={loading} aria-busy={loading}>
+          <h2>Sign Up for An Account</h2>
+          <Error error={error} />
+          <label htmlFor="email">
+            Email
                   <input
-                  type="email"
-                  name="email"
-                  placeholder="email"
-                  value={inputs.email}
-                  onChange={saveToState}
-                />
-              </label>
-              <label htmlFor="name">
-                Name
+              type="email"
+              name="email"
+              placeholder="email"
+              value={inputs.email}
+              onChange={saveToState}
+            />
+          </label>
+          <label htmlFor="name">
+            Name
                   <input
-                  type="text"
-                  name="name"
-                  placeholder="name"
-                  value={inputs.name}
-                  onChange={saveToState}
-                />
-              </label>
-              <label htmlFor="password">
-                Password
+              type="text"
+              name="name"
+              placeholder="name"
+              value={inputs.name}
+              onChange={saveToState}
+            />
+          </label>
+          <label htmlFor="password">
+            Password
                   <input
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  value={inputs.password}
-                  onChange={saveToState}
-                />
-              </label>
-              <button type="submit">Sign Up!</button>
-            </fieldset>
-          </Form>
-        </RegisterContainer>
-      )}
-    </Mutation>
+              type="password"
+              name="password"
+              placeholder="password"
+              value={inputs.password}
+              onChange={saveToState}
+            />
+          </label>
+          <button type="submit">Sign Up!</button>
+        </fieldset>
+      </Form>
+    </RegisterContainer>
   );
 }
 

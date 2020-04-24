@@ -30,8 +30,6 @@ function Search() {
   const [loading, setLoading] = useState(false);
 
   resetIdCounter();
-
-
   const onChange = debounce(async (e, client) => {
     console.log('Searching...');
 

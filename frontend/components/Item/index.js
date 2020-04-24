@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Container } from './styles';
@@ -38,6 +37,4 @@ function Item({ item }) {
   );
 }
 
-
 export default Item;
-

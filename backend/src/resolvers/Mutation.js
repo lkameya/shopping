@@ -3,21 +3,19 @@ const jwt = require('jsonwebtoken');
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
 const { transport, makeANiceEmail } = require('../mail');
-const { hasPermission } = require('../utils');
+const { hasPermission, getUserId } = require('../utils');
 const stripe = require('../stripe');
 
 const Mutations = {
   async createItem(parent, args, ctx, info) {
-    if (!ctx.request.userId) {
-      throw new Error('You must be logged in to do that!');
-    }
+    const userId = getUserId(ctx);
 
     const item = await ctx.db.mutation.createItem(
       {
         data: {
           user: {
             connect: {
-              id: ctx.request.userId,
+              id: userId,
             },
           },
           ...args,
@@ -29,6 +27,7 @@ const Mutations = {
     return item;
   },
   updateItem(parent, args, ctx, info) {
+    const userId = getUserId(ctx);
     const updates = { ...args };
     delete updates.id;
 
@@ -43,11 +42,22 @@ const Mutations = {
     );
   },
   async deleteItem(parent, args, ctx, info) {
+    const userId = getUserId(ctx);
+
+    const user = await ctx.db.query.user(
+      { where: { id: userId } },
+      '{ id, permissions, email, name }'
+    );
+
+    console.log(user);
+
     const where = { id: args.id };
     const item = await ctx.db.query.item({ where }, `{ id title user { id }}`);
-    const ownsItem = item.user.id === ctx.request.userId;
+    const ownsItem = item.user.id === userId;
 
-    const hasPermissions = ctx.request.user.permissions.some(permission =>
+    console.log(item);
+
+    const hasPermissions = user.permissions.some(permission =>
       ['ADMIN', 'ITEMDELETE'].includes(permission)
     );
 
@@ -75,12 +85,10 @@ const Mutations = {
 
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
 
-    ctx.response.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
-    });
-
-    return user;
+    return {
+      user,
+      token
+    };
   },
 
   async signin(parent, { email, password }, ctx, info) {
@@ -95,16 +103,13 @@ const Mutations = {
     }
 
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
-
-    ctx.response.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365,
-    });
-
-    return user;
+    return {
+      user,
+      token
+    };
   },
+
   signout(parent, args, ctx, info) {
-    ctx.response.clearCookie('token');
     return { message: 'Goodbye!' };
   },
 
@@ -164,24 +169,20 @@ const Mutations = {
 
     const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
 
-    ctx.response.cookie('token', token, {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365,
-    });
-
-    return updatedUser;
+    return {
+      user,
+      token
+    };
   },
 
 
   async updatePermissions(parent, args, ctx, info) {
-    if (!ctx.request.userId) {
-      throw new Error('You must be logged in!');
-    }
+    const userId = getUserId(ctx);
 
     const currentUser = await ctx.db.query.user(
       {
         where: {
-          id: ctx.request.userId,
+          id: userId,
         },
       },
       info
@@ -204,10 +205,7 @@ const Mutations = {
   },
 
   async addToCart(parent, args, ctx, info) {
-    const { userId } = ctx.request;
-    if (!userId) {
-      throw new Error('You must be signed in soooon');
-    }
+    const userId = getUserId(ctx);
 
     const [existingCartItem] = await ctx.db.query.cartItems({
       where: {
@@ -241,6 +239,7 @@ const Mutations = {
     );
   },
   async removeFromCart(parent, args, ctx, info) {
+    const userId = getUserId(ctx);
     // 1. Find the cart item
     const cartItem = await ctx.db.query.cartItem(
       {
@@ -253,7 +252,7 @@ const Mutations = {
     // 1.5 Make sure we found an item
     if (!cartItem) throw new Error('No CartItem Found!');
     // 2. Make sure they own that cart item
-    if (cartItem.user.id !== ctx.request.userId) {
+    if (cartItem.user.id !== userId) {
       throw new Error('Cheatin huhhhh');
     }
     // 3. Delete that cart item
@@ -267,9 +266,8 @@ const Mutations = {
 
 
   async createOrder(parent, args, ctx, info) {
-    // 1. Query the current user and make sure they are signed in
-    const { userId } = ctx.request;
-    if (!userId) throw new Error('You must be signed in to complete this order.');
+    const userId = getUserId(ctx);
+
     const user = await ctx.db.query.user(
       { where: { id: userId } },
       `{

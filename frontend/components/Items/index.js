@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import Item from '../Item';
 import { perPage } from '../../config';
 import { ItemsContainer } from './styles';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -19,11 +20,15 @@ const ALL_ITEMS_QUERY = gql`
 function Items({ page }) {
   const { loading, error, data } = useQuery(ALL_ITEMS_QUERY, {
     variables: { skip: page * perPage - perPage },
-    fetchPolicy: "network-only"
+    //fetchPolicy: "network-only"
   });
 
-  if (loading) return <p>Loading...</p>;
+  const me = useCurrentUser();
+
+  if (loading || !me || !data) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+
+  console.log(me);
 
   return (
     <ItemsContainer>

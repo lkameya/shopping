@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Mutation } from '@apollo/react-components';
-import { gql } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import Router from 'next/router';
 import Form from '../_Shared/Form';
 import Error from '../_Shared/ErrorMessage';
@@ -34,6 +33,10 @@ function CreateItem() {
     largerImage: '',
   });
 
+  const [createItem, { loading, error }] = useMutation(CREATE_ITEM_MUTATION, {
+    variables: inputs,
+  })
+
   const handleChange = e => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(value) : value;
@@ -59,78 +62,74 @@ function CreateItem() {
   };
 
   return (
-    <Mutation mutation={CREATE_ITEM_MUTATION} variables={inputs}>
-      {(createItem, { loading, error }) => (
-        <Form
-          data-test="form"
-          onSubmit={async e => {
-            e.preventDefault();
-            const res = await createItem();
-            Router.push({
-              pathname: '/item',
-              query: { id: res.data.createItem.id },
-            });
-          }}
-        >
-          <Error error={error} />
-          <fieldset disabled={loading} aria-busy={loading}>
-            <label htmlFor="file">
-              Image
+    <Form
+      data-test="form"
+      onSubmit={async e => {
+        e.preventDefault();
+        const res = await createItem();
+        Router.push({
+          pathname: '/item',
+          query: { id: res.data.createItem.id },
+        });
+      }}
+    >
+      <Error error={error} />
+      <fieldset disabled={loading} aria-busy={loading}>
+        <label htmlFor="file">
+          Image
                 <input
-                type="file"
-                id="file"
-                name="file"
-                placeholder="Upload an image"
-                required
-                onChange={uploadFile}
-              />
-              {inputs.image && (
-                <img width="200" src={inputs.image} alt="Upload Preview" />
-              )}
-            </label>
+            type="file"
+            id="file"
+            name="file"
+            placeholder="Upload an image"
+            required
+            onChange={uploadFile}
+          />
+          {inputs.image && (
+            <img width="200" src={inputs.image} alt="Upload Preview" />
+          )}
+        </label>
 
-            <label htmlFor="title">
-              Title
+        <label htmlFor="title">
+          Title
             <input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Title"
-                required
-                value={inputs.title}
-                onChange={handleChange}
-              />
-            </label>
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Title"
+            required
+            value={inputs.title}
+            onChange={handleChange}
+          />
+        </label>
 
-            <label htmlFor="price">
-              Price
+        <label htmlFor="price">
+          Price
             <input
-                type="number"
-                id="price"
-                name="price"
-                placeholder="Price"
-                required
-                value={inputs.price}
-                onChange={handleChange}
-              />
-            </label>
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Price"
+            required
+            value={inputs.price}
+            onChange={handleChange}
+          />
+        </label>
 
-            <label htmlFor="description">
-              Description
+        <label htmlFor="description">
+          Description
             <textarea
-                id="description"
-                name="description"
-                placeholder="Enter A Description"
-                required
-                value={inputs.description}
-                onChange={handleChange}
-              />
-            </label>
-            <button type="submit">Submit</button>
-          </fieldset>
-        </Form>
-      )}
-    </Mutation>
+            id="description"
+            name="description"
+            placeholder="Enter A Description"
+            required
+            value={inputs.description}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </fieldset>
+    </Form>
   )
 }
 

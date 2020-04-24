@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "^3.0.0-beta.44",
+    "@apollo/link-context": "^2.0.0-beta.3",
     "@apollo/react-components": "^4.0.0-beta.1",
     "@apollo/react-hoc": "^4.0.0-beta.1",
     "@apollo/react-ssr": "^4.0.0-beta.1",
@@ -29,6 +30,7 @@
     "enzyme-adapter-react-16": "^1.5.0",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
+    "js-cookie": "^2.2.1",
     "lodash.debounce": "^4.0.8",
     "next": "^9.3.4",
     "next-with-apollo": "^5.0.1",
