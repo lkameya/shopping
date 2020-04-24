@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { ItemContainer } from './styles';
 import AddToCart from '../AddToCart';
 import formatMoney from '../../lib/formatMoney';
+import Loading from '../_Shared/Loading';
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;
@@ -42,18 +43,19 @@ function SingleItem({ id }) {
     variables: { id }
   });
 
-  if (!data) return null;
+  if (loading) return <Loading />;
   const { item } = data;
   if (error) return <Error error={error} />;
-  if (loading) return <p>Loading!</p>;
   if (!data.item) return <p>No item found!</p>;
 
   return (
     <ItemContainer>
       <Head>
-        <title>Wears | {item.title}</title>
+        <title>Thrift Store | {item.title}</title>
       </Head>
-      <img src={data.item.largeImage} />
+      <div className="imageContainer">
+        <div><img src={data.item.largeImage} /></div>
+      </div>
       <div className="details">
         <h4>{formatMoney(item.price)}</h4>
         <hr />

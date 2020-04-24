@@ -31,3 +31,5 @@ export function useCurrentUser() {
     me
   }
 }
+
+export { CURRENT_USER_QUERY };

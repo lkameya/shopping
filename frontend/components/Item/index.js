@@ -3,12 +3,16 @@ import Link from 'next/link';
 import { Container } from './styles';
 import DeleteItem from '../DeleteItem';
 import formatMoney from '../../lib/formatMoney';
+import { useState } from 'react';
 
 Item.propTypes = {
   item: PropTypes.object.isRequired,
 }
 
 function Item({ item }) {
+  const [hovered, setHovered] = useState(false);
+
+
   return (
     <Link href={{
       pathname: 'item',
@@ -16,9 +20,15 @@ function Item({ item }) {
         id: item.id
       }
     }}>
-      <Container>
+      <Container onMouseOver={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+        {hovered &&
+          <>
+            <div className="priceHover" />
+            <span>{formatMoney(item.price)}</span>
+          </>
+        }
         {item.image && <img src={item.image} alt={item.title} />}
-        <span>{item.title}</span>
+        {/* <span>{item.title}</span>
         <span>{formatMoney(item.price)}</span>
         <div>
           <Link
@@ -29,9 +39,9 @@ function Item({ item }) {
           >
             <a>Edit ✏️</a>
           </Link>
-          {/* <AddToCart id={item.id} /> */}
+          <AddToCart id={item.id} />
           <DeleteItem id={item.id}>Delete This Item</DeleteItem>
-        </div>
+        </div> */}
       </Container>
     </Link>
   );

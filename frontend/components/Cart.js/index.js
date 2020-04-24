@@ -26,8 +26,9 @@ function Cart() {
   const { data } = useQuery(LOCAL_STATE_QUERY);
   const user = useCurrentUser();
 
-  if (!user) return <p> Loading ...</p>;
+  if (!user) return null;
   const { me } = user;
+  if (!me) return null;
   return (
     <CartContainer open={data.cartOpen}>
       <header>

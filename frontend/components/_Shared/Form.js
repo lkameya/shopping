@@ -51,7 +51,7 @@ const Form = styled.form`
     &[disabled] {
       opacity: 0.5;
     }
-    &::before {
+    /* &::before {
       height: 2px;
       content: '';
       display: block;
@@ -60,7 +60,7 @@ const Form = styled.form`
     &[aria-busy='true']::before {
       background-size: 50% auto;
       animation: ${loading} 0.5s linear infinite;
-    }
+    } */
   }
   h2 {
     text-align:center;

@@ -38,8 +38,10 @@
     "react": "^16.13.1",
     "react-adopt": "^0.6.0",
     "react-dom": "^16.13.1",
+    "react-spring": "^8.0.27",
     "react-stripe-checkout": "^2.6.3",
     "react-transition-group": "^4.3.0",
+    "resize-observer-polyfill": "^1.5.1",
     "styled-components": "^5.1.0",
     "waait": "^1.0.5"
   },

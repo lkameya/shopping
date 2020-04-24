@@ -4,6 +4,7 @@ import Head from 'next/head';
 import formatMoney from '../../lib/formatMoney';
 import Error from '../_Shared/ErrorMessage';
 import OrderContainer from './styles';
+import Loading from '../_Shared/Loading';
 
 const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER_QUERY($id: ID!) {
@@ -37,13 +38,13 @@ function Order({ id }) {
   });
 
   if (error) return <Error error={error} />;
-  if (loading) return <p> Loading...</p>;
+  if (loading) return <Loading />;
   const order = data.order;
 
   return (
     <OrderContainer data-test="order">
       <Head>
-        <title>Wears - Order {order.id}</title>
+        <title>Thrift Store - Order {order.id}</title>
       </Head>
       <p>
         <span>Order ID:</span>

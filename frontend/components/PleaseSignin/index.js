@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client';
-import { CURRENT_USER_QUERY } from '../User';
 import Signin from '../Signin';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
 
 function PleaseSignin(props) {
-  const { data, loading } = useQuery(CURRENT_USER_QUERY);
-
-  if (!data || loading) return <p> Loading ...</p>;
-  if (!data.me) {
+  const user = useCurrentUser();
+  if (!user) return null;
+  const { me } = user;
+  if (!me) {
     return (
       <div>
         <p>Please Sign In before continuing</p>

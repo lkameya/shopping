@@ -5,6 +5,7 @@ import { ApolloConsumer } from '@apollo/react-components';
 import { gql } from '@apollo/client';
 import debounce from 'lodash.debounce';
 import { DropDown, DropDownItem, SearchContainer } from './styles';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
 
 const SEARCH_ITEMS_QUERY = gql`
   query SEARCH_ITEMS_QUERY($searchTerm: String!) {
@@ -28,11 +29,12 @@ function routeToItem(item) {
 function Search() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const user = useCurrentUser();
+  if (!user) return null;
+  if (!user.me) return <div></div>;
 
   resetIdCounter();
   const onChange = debounce(async (e, client) => {
-    console.log('Searching...');
-
     setLoading(true);
 
     const res = await client.query({

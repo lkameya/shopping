@@ -3,8 +3,7 @@ import { gql, useMutation } from '@apollo/client';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import calcTotalPrice from '../../lib/calcTotalPrice';
-import { CURRENT_USER_QUERY } from '../User';
-import { useCurrentUser } from '../../hooks/useCurrentUser';
+import { useCurrentUser, CURRENT_USER_QUERY } from '../../hooks/useCurrentUser';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {

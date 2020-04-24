@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Mutation, Query } from '@apollo/react-components';
-import { gql } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import Form from '../_Shared/Form';
-import Error from '../_Shared/ErrorMessage';
+import Loading from '../_Shared/Loading';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -27,6 +26,13 @@ const UPDATE_ITEM_MUTATION = gql`
 
 function UpdateItem({ id }) {
   const [inputs, setInputs] = useState({});
+  const [updateItem, { error, loading: saving }] = useMutation(UPDATE_ITEM_MUTATION, {
+    variables: inputs,
+  });
+
+  const { data, loading } = useQuery(SINGLE_ITEM_QUERY, {
+    variables: { id },
+  });
 
   const handleChange = e => {
     const { name, type, value } = e.target;
@@ -44,66 +50,52 @@ function UpdateItem({ id }) {
     });
   };
 
+  if (loading) return <Loading />;
+  if (!data.item) return <p>No Item Found for ID {id}</p>;
+
   return (
-    <Query
-      query={SINGLE_ITEM_QUERY}
-      variables={{
-        id,
-      }}
-    >
-      {({ data, loading }) => {
-        if (loading) return <p>Loading...</p>;
-        if (!data.item) return <p>No Item Found for ID {id}</p>;
-        return (
-          <Mutation mutation={UPDATE_ITEM_MUTATION} variables={inputs}>
-            {(updateItem, { loading, error }) => (
-              <Form onSubmit={e => handleUpdate(e, updateItem)}>
-                <fieldset disabled={loading} aria-busy={loading}>
-                  <label htmlFor="title">
-                    Title
-                      <input
-                      type="text"
-                      id="title"
-                      name="title"
-                      placeholder="Title"
-                      required
-                      defaultValue={data.item.title}
-                      onChange={handleChange}
-                    />
-                  </label>
+    <Form onSubmit={e => handleUpdate(e, updateItem)}>
+      <fieldset disabled={saving} aria-busy={saving}>
+        <label htmlFor="title">
+          Title
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Title"
+            required
+            defaultValue={data.item.title}
+            onChange={handleChange}
+          />
+        </label>
 
-                  <label htmlFor="price">
-                    Price
+        <label htmlFor="price">
+          Price
                       <input
-                      type="number"
-                      id="price"
-                      name="price"
-                      placeholder="Price"
-                      required
-                      defaultValue={data.item.price}
-                      onChange={handleChange}
-                    />
-                  </label>
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Price"
+            required
+            defaultValue={data.item.price}
+            onChange={handleChange}
+          />
+        </label>
 
-                  <label htmlFor="description">
-                    Description
-                      <textarea
-                      id="description"
-                      name="description"
-                      placeholder="Enter A Description"
-                      required
-                      defaultValue={data.item.description}
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
-                </fieldset>
-              </Form>
-            )}
-          </Mutation>
-        );
-      }}
-    </Query>
+        <label htmlFor="description">
+          Description
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Enter A Description"
+            required
+            defaultValue={data.item.description}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
+      </fieldset>
+    </Form>
   );
 }
 
