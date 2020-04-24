@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const OrderItemStyles = styled.li`
+export const OrderItemStyles = styled.li`
   box-shadow: ${props => props.theme.bs};
   list-style: none;
   padding: 2rem;
@@ -41,4 +41,9 @@ const OrderItemStyles = styled.li`
   }
 `;
 
-export default OrderItemStyles;
+export const OrderUl = styled.ul`
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+`;
+

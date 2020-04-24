@@ -14,7 +14,10 @@
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "bcryptjs": "^2.4.3",
+    "connect-redis": "^4.0.4",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express-session": "^1.17.1",
     "graphql": "^0.13.2",
     "graphql-cli": "^2.16.7",
     "graphql-yoga": "^1.17.4",
@@ -23,6 +26,7 @@
     "nodemon": "^2.0.3",
     "prisma": "^1.17.1",
     "prisma-binding": "^2.1.6",
+    "redis": "^3.0.2",
     "stripe": "^8.39.1"
   }
 }

@@ -1,39 +1,52 @@
 import withApollo from 'next-with-apollo';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/link-context';
+import { getDataFromTree } from '@apollo/react-ssr';
 import { endpoint, prodEndpoint } from '../config';
 import { LOCAL_STATE_QUERY } from '../components/Cart.js';
 
-function createClient({ headers }) {
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4444',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+
+const cache = new InMemoryCache();
+cache.writeQuery({
+  query: LOCAL_STATE_QUERY,
+  data: {
+    cartOpen: false
+  },
+});
+
+function createClient({ headers, initialState }) {
   return new ApolloClient({
-    uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
-    request: operation => {
-      operation.setContext({
-        fetchOptions: {
-          credentials: 'include',
-        },
-        headers,
-      });
-    },
-    //local data
-    clientState: {
-      resolvers: {
-        Mutation: {
-          toggleCart(_, variables, { cache }) {
-            // read the cartOpen value from the cache
-            const { cartOpen } = cache.readQuery({
-              query: LOCAL_STATE_QUERY,
-            });
-            // Write the cart State to the opposite
-            const data = {
-              data: { cartOpen: !cartOpen },
-            };
-            cache.writeData(data);
-            return data;
-          },
-        },
-      },
-      defaults: {
-        cartOpen: true,
+    link: authLink.concat(httpLink),
+    cache,
+    resolvers: {
+      Mutation: {
+        toggleCart: (_, variables, { cache }) => {
+          // read the cartOpen value from the cache
+          const { cartOpen } = cache.readQuery({
+            query: LOCAL_STATE_QUERY,
+          });
+          const data = {
+            data: { cartOpen: !cartOpen },
+          };
+          cache.writeQuery({
+            query: LOCAL_STATE_QUERY,
+            data: { cartOpen: !cartOpen },
+          });
+          return data;
+        }
       },
     },
   });

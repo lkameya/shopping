@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Downshift, { resetIdCounter } from 'downshift';
 import Router from 'next/router';
-import { ApolloConsumer } from 'react-apollo';
-import gql from 'graphql-tag';
+import { ApolloConsumer } from '@apollo/react-components';
+import { gql } from '@apollo/client';
 import debounce from 'lodash.debounce';
 import { DropDown, DropDownItem, SearchContainer } from './styles';
 
@@ -30,8 +30,6 @@ function Search() {
   const [loading, setLoading] = useState(false);
 
   resetIdCounter();
-
-
   const onChange = debounce(async (e, client) => {
     console.log('Searching...');
 
