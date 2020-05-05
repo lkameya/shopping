@@ -6,7 +6,7 @@ import { endpoint, prodEndpoint } from '../config';
 import { LOCAL_STATE_QUERY } from '../components/Cart.js';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4444',
+  uri: prodEndpoint,
 });
 
 const authLink = setContext((_, { headers }) => {

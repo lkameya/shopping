@@ -20,10 +20,10 @@ function Item({ item }) {
         id: item.id
       }
     }}>
-      <Container onMouseOver={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <Container onPointerOver={() => setHovered(true)} onPointerLeave={() => setHovered(false)}>
         {hovered &&
           <>
-            <div className="priceHover" />
+            <div className="priceHover">&nbsp;</div>
             <span>{formatMoney(item.price)}</span>
           </>
         }

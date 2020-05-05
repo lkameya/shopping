@@ -12,7 +12,7 @@ export default function Meta() {
       <link rel="shortcupt icon" href="/static/favicon.ico" />
       <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
       <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700&display=swap" rel="stylesheet" />
-      <title>Wears</title>
+      <title>Thrift Store</title>
     </Head>
   );
 }

@@ -26,6 +26,7 @@ export function useCurrentUser() {
   const { data, loading } = useQuery(CURRENT_USER_QUERY, { fetchPolicy: "network-only" });
 
   if (!data) return null;
+
   const { me } = data;
   return {
     me

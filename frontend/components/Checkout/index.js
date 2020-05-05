@@ -50,7 +50,7 @@ function Checkout({ children }) {
   return (
     <StripeCheckout
       amount={calcTotalPrice(me.cart)}
-      name="Wears"
+      name="Thrift Store"
       description={`Order of ${totalItems(me.cart)} items!`}
       image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
       stripeKey="pk_test_bXMWUkfPQbOBbnT4xEiJU8Ob00kjGJSn5Q"

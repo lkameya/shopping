@@ -31,11 +31,11 @@ export const Container = styled.div`
 
   .priceHover {
     position: absolute;
-    background-color: #fff;
     padding: .4rem .7rem;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    z-index: 10;
   }
 
   span {
@@ -44,7 +44,7 @@ export const Container = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 3rem;
-    z-index: 2;
+    z-index: 20;
   }
   /* .buttonList {
     display: grid;

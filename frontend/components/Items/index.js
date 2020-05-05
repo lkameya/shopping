@@ -24,9 +24,11 @@ function Items({ page }) {
     //fetchPolicy: "network-only"
   });
 
-  const me = useCurrentUser();
+  const user = useCurrentUser();
+  if (!user) return null;
+  const { me } = user;
 
-  if (loading || !me || !data) return <Loading />;
+  if (loading || !data) return <Loading />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (

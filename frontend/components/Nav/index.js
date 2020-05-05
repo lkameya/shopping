@@ -9,6 +9,7 @@ import { useCurrentUser } from '../../hooks/useCurrentUser.js';
 export default function Nav() {
   const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
   const user = useCurrentUser();
+
   if (!user) return null;
   const { me } = user;
   return (
